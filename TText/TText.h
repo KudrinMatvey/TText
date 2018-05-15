@@ -52,6 +52,7 @@ public:
 	TLink *GetpFirst();
 	void SetCurrFalse();
 
+	bool CheckFirst();
 	void SetFirst(TLink *first);
 	void GoNextLink();
 	void GoDownLink();

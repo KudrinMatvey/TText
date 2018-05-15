@@ -20,9 +20,21 @@ int main() {
 	char buf[80];
 	bool readFlag = false;
 
-	cout << "This is a program to work with hierarchial text \n\nn - new first line \nr - read\np - print\ns - save\nq - quit\ne - clear\nf - print free\nd - clear memory\n" <<
-		"a - go to previous link\nz - go to next link\nx - go to down link\n1 - insert next line\n2 - insert next section\n" <<
-		"3 - insert down line\n4 - insert down section\n5 - delete next link\n6 - delete down link\n";
+	cout << "This is a program to work with hierarchial text \n\nn - new first line\nq - quit\nf - print free\ni - for further info\n";
+	while (!text.CheckFirst()) {
+		SetColor(ConsoleColor::LightGreen, ConsoleColor::Black);
+		cout << "user: ";
+		SetColor(ConsoleColor::LightGray, ConsoleColor::Black);
+		s = _getch();
+		cout << s << endl;
+		switch (s) {
+		case 'i': cout << "n - new first line\nr - read\np - print\ns - save\nq - quit\ne - clear\nf - print free\nd - clear memory\n" <<
+			"a - go to previous link\nz - go to next link\nx - go to down link\n1 - insert next line\n2 - insert next section\n" <<
+			"3 - insert down line\n4 - insert down section\n5 - delete next link\n6 - delete down link\n"; break;
+		case 'n': cout << "Insert first line, it will be added only if its free : "; cin >> buf; tmp.SetStr(buf); text.SetFirst(&tmp); break;
+		case 'f': TLink::PrintFree(); break;
+		}
+	}
 
 	while (true) {
 		SetColor(ConsoleColor::LightGreen, ConsoleColor::Black);
@@ -32,7 +44,7 @@ int main() {
 		cout << s << endl;
 
 		switch (s) {
-		case 'i': cout << "r - read\np - print\ns - save\nq - quit\ne - clear\nf - print free\nd - clear memory\n" <<
+		case 'i': cout << "n - new first line\nr - read\np - print\ns - save\nq - quit\ne - clear\nf - print free\nd - clear memory\n" <<
 			"a - go to previous link\nz - go to next link\nx - go to down link\n1 - insert next line\n2 - insert next section\n" <<
 			"3 - insert down line\n4 - insert down section\n5 - delete next link\n6 - delete down link\n"; break;
 		case 'n': cout << "Insert first line, it will be added only if its free : "; cin >> buf; tmp.SetStr(buf); text.SetFirst(&tmp); break;
@@ -41,7 +53,7 @@ int main() {
 			else { readFlag = true; cout << "Successful reading\n"; }; break;
 		case 'p': text.Print(); break;
 		case 's': text.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text_v2.0\\SavedText.txt"); cout << "Successful saving\n"; break;
-		case 'c': { TText tmp; tmp.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text_v2.0\\Copy.txt"); break; }
+		case 'c': { TText tmp; tmp.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text_v2.0\\Copy.txt"); } break;
 		case 'e': clrscr(); cout << "i - info\n"; break;
 		case 'f': TLink::PrintFree(); break;
 		case 'd': if (readFlag) { TLink::MemClear(text); cout << "Memory was cleared\n"; }
@@ -50,12 +62,12 @@ int main() {
 		case 'a': text.GoPrevLink(); text.Print(); break;
 		case 'z': text.GoNextLink(); text.Print(); break;
 		case 'x': text.GoDownLink(); text.Print(); break;
-		case '1': cout << "Enter your line: "; cin >> buf; text.InsNextLine(buf); text.Print(); break;
-		case '2': cout << "Enter your line: "; cin >> buf; text.InsNextSection(buf); text.Print(); break;
-		case '3': cout << "Enter your line: "; cin >> buf; text.InsDownLine(buf); text.Print(); break;
+		case '1': cout << "Enter your line: "; cin >> buf; text.InsNextLine(buf); text.Print();  break;
+		case '2': cout << "Enter your line: "; cin >> buf; text.InsNextSection(buf); text.Print();  break;
+		case '3': cout << "Enter your line: "; cin >> buf; text.InsDownLine(buf); text.Print();  break;
 		case '4': cout << "Enter your line: "; cin >> buf; text.InsDownSection(buf); text.Print(); break;
 		case '5': text.DelNext(); text.Print(); break;
-		case '6': text.DelDown(); text.Print(); break;
+		case '6': text.DelDown(); text.Print();  break;
 		default: cout << "Input error\n";
 		}
 	}

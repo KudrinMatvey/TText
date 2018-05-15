@@ -116,6 +116,16 @@ return res;
 }*/
 
 
+bool TText::CheckFirst()
+{
+	if (pFirst == nullptr)
+	{
+		cout << "Please add first line\n";
+		return false;
+	}
+	else return true;
+}
+
 void TText::SetFirst(TLink *first)
 {	
 	if(pFirst==nullptr)
