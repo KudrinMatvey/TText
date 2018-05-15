@@ -10,6 +10,8 @@ TLink::TLink(char *_str, TLink *pN, TLink *pD) {
 		strncpy_s(str, _str, 80);
 }
 
+
+
 void *TLink::operator new(size_t s) {
 	TLink *tmp = mem.pFree;
 
@@ -113,6 +115,14 @@ res.st = t.st;
 return res;
 }*/
 
+
+void TText::SetFirst(TLink *first)
+{	
+	if(pFirst==nullptr)
+		pFirst = pCurr = first;
+
+	else cout << "sorry first line is already created\n";
+}
 
 void TText::GoNextLink() {
 	if (pCurr->pNext != NULL) {

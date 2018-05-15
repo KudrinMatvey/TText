@@ -14,11 +14,15 @@ int main() {
 
 	char fileName[] = "C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text_v2.0\\Source.txt";
 	TText text;
+	TLink tmp;
+
 	char s;
 	char buf[80];
 	bool readFlag = false;
 
-	cout << "i - info\n";
+	cout << "This is a program to work with hierarchial text \n\nn - new first line \nr - read\np - print\ns - save\nq - quit\ne - clear\nf - print free\nd - clear memory\n" <<
+		"a - go to previous link\nz - go to next link\nx - go to down link\n1 - insert next line\n2 - insert next section\n" <<
+		"3 - insert down line\n4 - insert down section\n5 - delete next link\n6 - delete down link\n";
 
 	while (true) {
 		SetColor(ConsoleColor::LightGreen, ConsoleColor::Black);
@@ -31,17 +35,18 @@ int main() {
 		case 'i': cout << "r - read\np - print\ns - save\nq - quit\ne - clear\nf - print free\nd - clear memory\n" <<
 			"a - go to previous link\nz - go to next link\nx - go to down link\n1 - insert next line\n2 - insert next section\n" <<
 			"3 - insert down line\n4 - insert down section\n5 - delete next link\n6 - delete down link\n"; break;
+		case 'n': cout << "Insert first line, it will be added only if its free : "; cin >> buf; tmp.SetStr(buf); text.SetFirst(&tmp); break;
 		case 'r': text.Read(fileName);
 			if (text.GetpFirst() == NULL) { cout << "Reading error\n"; }
 			else { readFlag = true; cout << "Successful reading\n"; }; break;
 		case 'p': text.Print(); break;
 		case 's': text.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text_v2.0\\SavedText.txt"); cout << "Successful saving\n"; break;
-			//case 'c': TText tmp; tmp.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text_v2.0\\Copy.txt"); break;
+		case 'c': { TText tmp; tmp.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text_v2.0\\Copy.txt"); break; }
 		case 'e': clrscr(); cout << "i - info\n"; break;
 		case 'f': TLink::PrintFree(); break;
 		case 'd': if (readFlag) { TLink::MemClear(text); cout << "Memory was cleared\n"; }
 				  else cout << "There is nothing to clear\n"; break;
-		case 'q': if (readFlag) { TLink::MemClear(text); } exit(0);
+		case 'q': if (readFlag) { TLink::MemClear(text); } return 0;
 		case 'a': text.GoPrevLink(); text.Print(); break;
 		case 'z': text.GoNextLink(); text.Print(); break;
 		case 'x': text.GoDownLink(); text.Print(); break;
@@ -54,8 +59,6 @@ int main() {
 		default: cout << "Input error\n";
 		}
 	}
-
-	return 0;
 }
 
 

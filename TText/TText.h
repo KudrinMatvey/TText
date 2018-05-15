@@ -23,7 +23,7 @@ public:
 
 	TLink(char *_str = NULL, TLink *pN = NULL, TLink *pD = NULL);
 	~TLink() {}
-
+	
 	void *operator new(size_t s);
 	void operator delete(void *p);
 
@@ -52,6 +52,7 @@ public:
 	TLink *GetpFirst();
 	void SetCurrFalse();
 
+	void SetFirst(TLink *first);
 	void GoNextLink();
 	void GoDownLink();
 	void GoPrevLink();
